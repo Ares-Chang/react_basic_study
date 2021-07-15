@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const params = { sex: '女', age: 18 }
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App {...params} />
   </React.StrictMode>,
   document.getElementById('root')
 );
