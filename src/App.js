@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-// 回调型 Refs Demo
+// createRef Demo
 class App extends React.Component {
+  myRef = React.createRef()
   showText = () => {
-    alert(this.input.value)
-  }
-  setDome = (e) => {
-    this.input = e
+    alert(this.myRef.currenst.value)
   }
   render() {
     return (
       <div>
-        {/* class 绑定式 */}
-        <input ref={this.setDome} onBlur={this.showText} type="text" placeholder="失去焦点弹窗输入内容！" />
+        {/* createRef 绑定式 */}
+        <input ref={this.myRef} onBlur={this.showText} type="text" placeholder="失去焦点弹窗输入内容！" />
       </div>
     )
   }
