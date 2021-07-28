@@ -16,13 +16,13 @@ class App extends React.Component {
   }
 
   // 组件将要挂载的钩子
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     /**
-     * 这是一个旧的钩子函数，新版更名为 
+     * 新版 componentWillMount 更名为 UNSAFE_componentWillMount 
      * 
      * 组件挂载之前执行此钩子
      */
-    console.log('mount ---- componentWillMount: 组件将要挂载了！')
+    console.log('mount ---- UNSAFE_componentWillMount: 组件将要挂载了！')
   }
 
   // 组件挂载完毕的钩子
@@ -48,11 +48,12 @@ class App extends React.Component {
   }
 
   // 组件将要更新的钩子
-  componentWillUpdate() {
+  UNSAFE_componentWillUpdate() {
     /**
+     * 新版 componentWillUpdate 更名为 UNSAFE_componentWillUpdate
      * 组件更新之前会执行此钩子。
      */
-    console.log('update ---- componentWillUpdate: 组件马上要更新了！')
+    console.log('update ---- UNSAFE_componentWillUpdate: 组件马上要更新了！')
   }
 
   // 组件更新完毕的钩子
@@ -109,14 +110,16 @@ class App extends React.Component {
 
 class Children extends React.Component {
   // props 更新会触发这个钩子
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     /**
-     * 父组件更新 props 之后会触发 componentWillReceiveProps 钩子
+     * 新版 componentWillReceiveProps 更名为 UNSAFE_componentWillReceiveProps
+     * 
+     * 父组件更新 props 之后会触发 UNSAFE_componentWillReceiveProps 钩子
      * 钩子会自带 props 参数，值为父组件传递的 props 属性
      * 
      * 但是！这个钩子第一次挂载并不会生效，只有在父组件再次更新之后才会触发这个钩子！！！
      */
-    console.log('update ---- componentWillReceiveProps: 父组件更新了，我也想更新~')
+    console.log('update ---- UNSAFE_: 父组件更新了，我也想更新~')
   }
   render() {
     return <h1>{this.props.text}</h1>

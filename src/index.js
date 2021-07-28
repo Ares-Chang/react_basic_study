@@ -6,9 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 const params = { sex: '女', age: 18 }
 ReactDOM.render(
-  <React.StrictMode>
-    <App {...params} />
-  </React.StrictMode>,
+  // 严格模式下不可以用新版生命周期，不安全
+  // <React.StrictMode>
+  //   <App {...params} />
+  // </React.StrictMode>,
+
+  <App {...params} />,
   document.getElementById('root')
 );
 
