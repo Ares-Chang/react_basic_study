@@ -15,22 +15,27 @@ class App extends React.Component {
     }
   }
 
-  // 组件将要挂载的钩子
-  UNSAFE_componentWillMount() {
-    /**
-     * 新版 componentWillMount 更名为 UNSAFE_componentWillMount 
-     * 
-     * 组件挂载之前执行此钩子
-     */
-    console.log('mount ---- UNSAFE_componentWillMount: 组件将要挂载了！')
-  }
-
   // 组件挂载完毕的钩子
   componentDidMount() {
     /**
      * 组件挂载完毕之后会执行此钩子。
      */
     console.log('mount ---- componentDidMount: 组件挂载完成了！')
+  }
+
+  // 组件从 Props 中获取派生状态挂载完毕
+  static getDerivedStateFromProps(props, state) {
+    /**
+     * 这个钩子并不常用，钩子有两个传值，props 为组件传递过来的值，state 为初始设置的值。
+     * 这个钩子必须有返回值，返回值可以为 null 或者 状态对象
+     * 
+     * 如果返回的是状态对象，那么 state 的值在任何时候都取决于 props。
+     * 简单来说，如果这里返回了 props 状态值，那么以后 state 中存在的值就不能修改了！
+     * 
+     * 官方表示派生状态会导致代码冗余，并使组件难以维护。慎用！！！
+     */
+    console.log(`${!state.count ? "mount" : "update"} ---- getDerivedStateFromProps: 组件派生状态挂载完毕！`)
+    return props
   }
 
   // 控制组件是否更新的钩子
@@ -47,18 +52,28 @@ class App extends React.Component {
     return true
   }
 
-  // 组件将要更新的钩子
-  UNSAFE_componentWillUpdate() {
+  // 在更新之前获取快照
+  getSnapshotBeforeUpdate(prevProps, prevState) {
     /**
-     * 新版 componentWillUpdate 更名为 UNSAFE_componentWillUpdate
-     * 组件更新之前会执行此钩子。
+     * getSnapshotBeforeUpdate() 会在最近一次渲染输出（提交到 DOM 节点）之前调用。
+     * 钩子有两个传值，preProps 和 preState，值为更新修改之前的 props 和 state。
+     * 钩子触发时必须有返回值，返回值可选为 null 或 快照(任何类型值都可以作为快照返回)。
+     * 返回值将作为参数传递给 componentDidUpdate()
+     * 
+     * 注：此场景使用并不见，使用几率不高。
      */
-    console.log('update ---- UNSAFE_componentWillUpdate: 组件马上要更新了！')
+    console.log('update ---- getSnapshotBeforeUpdate: 在更新之前获取快照！')
+    return null
   }
 
   // 组件更新完毕的钩子
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     /**
+     * 钩子有三个参数:
+     * prevProps: 更新修改之前的 props 
+     * prevState: 更新修改之前的 state 
+     * snapshot: getSnapshotBeforeUpdate 传递过来的快照
+     * 
      * 组件更新完毕之后会执行此钩子。
      */
     console.log('update ---- componentDidUpdate: 组件更新完成了！')
@@ -70,7 +85,7 @@ class App extends React.Component {
     console.log(`${!count ? "mount" : "update"} ---- render: 每次需要渲染我都会触发！`)
     return (
       <div>
-        <Children text='组件的生命周期' />
+        <h1>组件的生命周期</h1>
         <h2>当前求和：{count}</h2>
         <button onClick={() => this.setState({ count: count + 1 })}>点我加1</button>
         <button onClick={this.unload}>卸载组件</button>
@@ -105,24 +120,6 @@ class App extends React.Component {
      */
     console.log('forceUpdate: 即将进入强制渲染流程！')
     this.forceUpdate()
-  }
-}
-
-class Children extends React.Component {
-  // props 更新会触发这个钩子
-  UNSAFE_componentWillReceiveProps(props) {
-    /**
-     * 新版 componentWillReceiveProps 更名为 UNSAFE_componentWillReceiveProps
-     * 
-     * 父组件更新 props 之后会触发 UNSAFE_componentWillReceiveProps 钩子
-     * 钩子会自带 props 参数，值为父组件传递的 props 属性
-     * 
-     * 但是！这个钩子第一次挂载并不会生效，只有在父组件再次更新之后才会触发这个钩子！！！
-     */
-    console.log('update ---- UNSAFE_: 父组件更新了，我也想更新~')
-  }
-  render() {
-    return <h1>{this.props.text}</h1>
   }
 }
 
