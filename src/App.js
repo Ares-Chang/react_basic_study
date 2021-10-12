@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TodoList from './components/TodoList'
 
 // 生命周期
 class App extends React.Component {
@@ -90,6 +91,8 @@ class App extends React.Component {
         <button onClick={() => this.setState({ count: count + 1 })}>点我加1</button>
         <button onClick={this.unload}>卸载组件</button>
         <button onClick={this.force}>强制更新</button>
+        <hr />
+        <TodoList />
       </div>
     )
   }
