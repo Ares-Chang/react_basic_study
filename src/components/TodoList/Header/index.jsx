@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class Header extends Component {
+	static propTypes = {
+		addTodo: PropTypes.func.isRequired
+	}
 	handleKeyDown = (e) => {
 		if (e.keyCode !== 13 || !e.target.value.trim()) return	// 按回车进入，否则退出,值为空也退出
 		this.props.addTodo({
