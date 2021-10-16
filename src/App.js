@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TodoList from "./components/TodoList";
 import GteDataList from "./components/GteDataList";
+import GitHubSearch from "./components/githubSearch";
 
 // 生命周期
 class App extends React.Component {
@@ -105,6 +106,7 @@ class App extends React.Component {
         <hr />
         <TodoList />
         <GteDataList />
+        <GitHubSearch />
       </div>
     );
   }
