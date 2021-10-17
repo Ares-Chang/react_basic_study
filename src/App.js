@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import TodoList from "./components/TodoList";
 import GteDataList from "./components/GteDataList";
 import GitHubSearch from "./components/githubSearch";
+import { Switch, Route, Link, NavLink, Redirect } from "react-router-dom";
 
 // 生命周期
 class App extends React.Component {
@@ -104,9 +105,33 @@ class App extends React.Component {
         <button onClick={this.unload}>卸载组件</button>
         <button onClick={this.force}>强制更新</button>
         <hr />
-        <TodoList />
-        <GteDataList />
-        <GitHubSearch />
+        <div className="list-group" style={{ display: "flex" }}>
+          <NavLink className="list-group-item" to="/todolist/1">
+            TodoList 案例
+          </NavLink>
+          <NavLink className="list-group-item" to="/getdatalist?id=2">
+            Axios 请求案例
+          </NavLink>
+          <NavLink
+            className="list-group-item"
+            to={{
+              pathname: "/githubsearch",
+              state: {
+                id: 3,
+              },
+            }}
+          >
+            GitHub 用户搜索案例
+          </NavLink>
+        </div>
+        {/* 路由注册 */}
+        <Switch>
+          <Route path="/todolist/:id" component={TodoList} />
+          <Route path="/getdatalist" component={GteDataList} />
+          <Route path="/githubsearch" component={GitHubSearch} />
+          {/* 兜底重定向，查无路由跳转到首页 */}
+          <Redirect to="/" />
+        </Switch>
       </div>
     );
   }

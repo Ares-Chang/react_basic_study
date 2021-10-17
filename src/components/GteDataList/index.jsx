@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import qs from "querystring"; // 处理URL拼接库
 
 export default class GetDataList extends Component {
   /**
@@ -14,6 +15,8 @@ export default class GetDataList extends Component {
     console.log(res);
   };
   render() {
+    // query 传值
+    console.log("query 传值：", qs.parse(this.props.location.search.slice(1)));
     return (
       <div>
         <button onClick={this.getStudentData}>点击请求学生数据</button>
