@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import TodoList from "./components/TodoList";
 import GteDataList from "./components/GteDataList";
 import GitHubSearch from "./components/githubSearch";
+import ReduxDemo from './components/ReduxDemo'
 import { Switch, Route, Link, NavLink, Redirect } from "react-router-dom";
 
 // 生命周期
@@ -123,12 +124,14 @@ class App extends React.Component {
           >
             GitHub 用户搜索案例
           </NavLink>
+          <NavLink className="list-group-item" to="/reduxdemo">Redux Demo</NavLink>
         </div>
         {/* 路由注册 */}
         <Switch>
           <Route path="/todolist/:id" component={TodoList} />
           <Route path="/getdatalist" component={GteDataList} />
           <Route path="/githubsearch" component={GitHubSearch} />
+          <Route path="/reduxdemo" component={ReduxDemo} />
           {/* 兜底重定向，查无路由跳转到首页 */}
           <Redirect to="/" />
         </Switch>
