@@ -3,6 +3,7 @@
  * @param {Object} perState 之前的状态
  * @param {Object} action 动作对象
  */
+import {INCREMENT, DECREMENT} from './constant'
 export default function reducer(perState = 0, action) {
   /**
    * type 为动作 key 值，用于判断
@@ -10,9 +11,9 @@ export default function reducer(perState = 0, action) {
    */
   const { type, data } = action
   switch (type) {
-    case 'increment':
+    case INCREMENT:
       return perState + data
-    case 'decrement':
+    case DECREMENT:
       return perState - data
     default:
       // 初始化

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import store from './redux/store'
+import { createIncrement, createDecrement } from './redux/action'
 
 class ReduxDemo extends Component {
   my_input = React.createRef()
@@ -29,20 +30,14 @@ class ReduxDemo extends Component {
    */
   add = () => {
     const { value } = this.state
-    store.dispatch({
-      type: 'increment',
-      data: value
-    })
+    store.dispatch(createIncrement(value))
   }
   /**
    * 减少
    */
   minus = () => {
     const { value } = this.state
-    store.dispatch({
-      type: 'decrement',
-      data: value
-    })
+    store.dispatch(createDecrement(value))
   }
   /**
    * 奇数加
@@ -50,10 +45,7 @@ class ReduxDemo extends Component {
   oddAdd = () => {
     const { value } = this.state
     if (!(store.getState() % 2)) return false // 偶数弹出
-    store.dispatch({
-      type: 'increment',
-      data: value
-    })
+    store.dispatch(createIncrement(value))
   }
   /**
    * 偶数加
@@ -61,10 +53,7 @@ class ReduxDemo extends Component {
   evenAdd = () => {
     const { value } = this.state
     if (store.getState() % 2) return false // 奇数弹出
-    store.dispatch({
-      type: 'increment',
-      data: value
-    })
+    store.dispatch(createIncrement(value))
   }
   /**
    * 异步加
@@ -73,10 +62,7 @@ class ReduxDemo extends Component {
     const { value } = this.state
     // 模拟请求
     setTimeout(() => {
-      store.dispatch({
-        type: 'increment',
-        data: value
-      })
+      store.dispatch(createIncrement(value))
     }, 3000)
   }
   render() {
